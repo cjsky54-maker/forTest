@@ -1,0 +1,99 @@
+{
+  "application": "Cooler Panel Auto-Tester",
+  "version": "0.3.0",
+  "started_at": "2026-11-18T16:02:25+03:30",
+  "finished_at": "2026-11-18T16:03:50+03:30",
+  "configuration": {
+    "started_at": "2026-11-18T16:02:25+03:30",
+    "firmware": "",
+    "com_port": "COM8",
+    "baud": 9600,
+    "mcu": "STM8L052R8",
+    "stvp_cli": "",
+    "backend": "auto"
+  },
+  "summary": {
+    "Pass": 1,
+    "Fail": 7,
+    "Skip": 3
+  },
+  "tests": [
+    {
+      "id": "T01",
+      "name": "شناسایی ابزار پروگرام",
+      "status": "Fail",
+      "message": "هیچ پروگرامر STM8 پیدا نشد؛ ST Visual Programmer را نصب کن یا مسیر آن را بده.",
+      "detail": ""
+    },
+    {
+      "id": "T02",
+      "name": "اتصال USB-Serial",
+      "status": "Pass",
+      "message": "پورت COM8 با 9600 baud باز شد.",
+      "detail": ""
+    },
+    {
+      "id": "T03",
+      "name": "فلش و Verify Firmware",
+      "status": "Skip",
+      "message": "فایل Firmware انتخاب نشده است.",
+      "detail": ""
+    },
+    {
+      "id": "T04",
+      "name": "Reset سخت‌افزاری هدف",
+      "status": "Skip",
+      "message": "ریست مستقل با STVP_CmdLine در این نسخه قابل اجرا نیست؛ سوئیچ -rst در CLI مستند نشده است. برای ریست خودکار قابل اتکا باید NRST را به یک خروجی کنترل‌شده متصل کنیم یا ماژول SWIM سطح پایین اضافه شود.",
+      "detail": ""
+    },
+    {
+      "id": "T05",
+      "name": "توالی راه‌اندازی POWER",
+      "status": "Fail",
+      "message": "فرمان START معتبر از پنل دریافت نشد.",
+      "detail": "تزریق RAM را در IAR بررسی کن؛ همچنین باید شرط آماده‌شدن OW/ADC برقرار باشد و setpoint صفر نباشد."
+    },
+    {
+      "id": "T06",
+      "name": "دریافت فریم از پنل",
+      "status": "Fail",
+      "message": "هیچ تبادل معتبر UART دریافت نشد. سیم‌بندی TX/RX، GND، سطح 3.3V، baud=9600 و جدا بودن درایور واقعی را بررسی کن. همچنین ممکن است پنل در Standby/خاموش باشد.",
+      "detail": ""
+    },
+    {
+      "id": "T07",
+      "name": "پاسخ به READ_STATUS",
+      "status": "Fail",
+      "message": "در ۱۰ ثانیه هیچ تبادل کامل READ_STATUS / RSP_READ_STATUS دیده نشد.",
+      "detail": ""
+    },
+    {
+      "id": "T08",
+      "name": "تزریق Fault دمای موتور",
+      "status": "Fail",
+      "message": "پنل در مهلت تست وضعیت Fault را نخواند یا پاسخ READ_STATUS فاقد بیت OVER_TEMP بود.",
+      "detail": "Fake Driver fault register=0x0040"
+    },
+    {
+      "id": "T09",
+      "name": "پاک‌سازی Fault",
+      "status": "Fail",
+      "message": "فرمان CLEAR_STATUS از پنل دریافت نشد یا Fake Driver پاسخ نداد.",
+      "detail": ""
+    },
+    {
+      "id": "T10",
+      "name": "قطع پاسخ Fake Driver",
+      "status": "Fail",
+      "message": "در بازهٔ قطع پاسخ، هیچ فرمان معتبر از پنل دریافت نشد.",
+      "detail": ""
+    },
+    {
+      "id": "T11",
+      "name": "خواندن رجیستر DC Bus",
+      "status": "Skip",
+      "message": "پنل در این اجرا رجیستر DC_BUS را نخواند؛ برای این تست صفحهٔ پارامترها/مسیر خواندن ولتاژ را فعال کن.",
+      "detail": ""
+    }
+  ]
+}
